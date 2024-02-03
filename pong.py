@@ -1,7 +1,7 @@
 import sys
 import pygame
 from settings import Settings
-from paddle import Paddle
+from paddle import PaddleOne, PaddleTwo
 
 class Pong():
     """Overall class to manage game assets and behavior."""
@@ -16,9 +16,10 @@ class Pong():
         pygame.display.set_caption("Pong")
         
         # Grupa sprite'ów dla paletki
-        self.paddle = Paddle()
+        self.paddle = PaddleOne()
+        self.paddle_two = PaddleTwo()
         self.all_sprites = pygame.sprite.Group()
-        self.all_sprites.add(self.paddle)
+        self.all_sprites.add(self.paddle, self.paddle_two)
 
     def run_game(self):
         """Start the main loop for the game."""
