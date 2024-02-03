@@ -1,6 +1,8 @@
 import pygame
 from settings import Settings
 
+
+
 class PaddleOne(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -13,12 +15,14 @@ class PaddleOne(pygame.sprite.Sprite):
         
 
     def update(self):
+        
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w] and self.rect.top > 0:
             self.rect.y -= self.settings.speed_paddle_one
         if keys[pygame.K_s] and self.rect.bottom < self.settings.screen_height:
             self.rect.y += self.settings.speed_paddle_one
 
+        
 class PaddleTwo(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
