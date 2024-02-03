@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from paddle import PaddleOne, PaddleTwo
 from ball import Ball
+import random
 
 class Pong():
     """Overall class to manage game assets and behavior."""
@@ -25,6 +26,9 @@ class Pong():
         self.all_sprites = pygame.sprite.Group()
         self.all_sprites.add(self.paddle_one,self.paddle_two, self.ball)
 
+        self.game_active = False  # Dodane, aby kontrolować, czy gra jest aktywna
+
+
     def run_game(self):
         """Start the main loop for the game."""
         while True:
@@ -33,14 +37,21 @@ class Pong():
                 if event.type == pygame.QUIT:
                     sys.exit()
 
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                    self.game_active = True
+                    self.ball.active = True  # Dodane, aby aktywować ruch piłki
+                    self.ball.speed = [random.choice([-5, 5]), random.choice([-5, 5])]
             
+            if self.game_active:  
+                self.all_sprites.update()
+                
+
             # Sprawdzenie kolizji piłki z paletkami
             if pygame.sprite.spritecollide(self.paddle_one, [self.ball], False) or pygame.sprite.spritecollide(self.paddle_two, [self.ball], False):
                 self.ball.speed[0] = -self.ball.speed[0]
             
             # Redraw the screen during each pass through the loop.
             self.screen.fill(self.settings.bg_color)
-            self.all_sprites.update()
             self.all_sprites.draw(self.screen)
 
             # Make the most recently drawn screen visible.
@@ -51,3 +62,8 @@ if __name__ == '__main__':
     # Make a game instance, and run the game.
     pong = Pong()
     pong.run_game()
+
+
+
+
+    
