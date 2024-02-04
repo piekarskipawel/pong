@@ -5,7 +5,7 @@ Player 2's controls are the UP and DOWN keys.
 
 SPACE key launches the game and the next game.
 
-Running the game requires the installation of Pygame.
+Running the game requires installation of Pygame.
 
 pip install pygame
 
