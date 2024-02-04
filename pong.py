@@ -31,7 +31,7 @@ class Pong():
         self.player1_score = 0
         self.player2_score = 0
 
-        # Funkcja do wyświetlania tekstu na ekranie
+    # Funkcja do wyświetlania tekstu startowego na ekranie
     def display_text(self):
         self.font_display_text = pygame.font.Font(None, 36)
         self.start_text = self.font_display_text.render("PRESS SPACE TO START GAME", True, self.settings.score_color)
