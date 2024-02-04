@@ -12,7 +12,6 @@ class PaddleOne(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (50, self.settings.screen_height // 2)
         
-
     def update(self):
         
         keys = pygame.key.get_pressed()

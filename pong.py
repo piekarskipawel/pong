@@ -29,9 +29,9 @@ class Pong():
 
         self.player1_score = 0
         self.player2_score = 0
-
-    # Start message
+    
     def display_text(self):
+        '''Start message'''
         self.font_display_text = pygame.font.Font(None, 36)
         self.start_text = self.font_display_text.render("PRESS SPACE TO START GAME", True, self.settings.score_color)
         self.screen.blit(self.start_text, (self.settings.screen_width // 2 - 190, self.settings.screen_height // 2))
@@ -39,6 +39,7 @@ class Pong():
     def run_game(self):
         """Start the main loop for the game."""
         while True:
+            
             # Watch for keyboard and mouse events.
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -50,8 +51,8 @@ class Pong():
                     self.ball.speed = self.settings.ball_speed
             
             if self.game_active:  
-                self.all_sprites.update()                
-                           
+                self.all_sprites.update()
+
                 # Bouncing the ball off the walls
                 if self.ball.rect.top <= 0 or self.ball.rect.bottom >= self.settings.screen_height:
                     self.ball.speed[1] = -self.ball.speed[1]    
@@ -64,12 +65,11 @@ class Pong():
                 self.screen.fill(self.settings.bg_color)
                 self.all_sprites.draw(self.screen)
             
-
                 # Display score
-                font = pygame.font.Font(None, 36)
-                player1_text = font.render(f"Player 1: {self.player1_score}", True, self.settings.score_color)
-                player2_text = font.render(f"Player 2: {self.player2_score}", True, self.settings.score_color)
-                self.screen.blit(player1_text, (50, 50))
+                font = pygame.font.Font(None, 56)
+                player1_text = font.render(f"{self.player1_score}", True, self.settings.score_color)
+                player2_text = font.render(f"{self.player2_score}", True, self.settings.score_color)
+                self.screen.blit(player1_text, (200, 50))
                 self.screen.blit(player2_text, (self.settings.screen_width - 200, 50))
 
                 # Resetting the ball and counting the point if behind the field
@@ -79,16 +79,14 @@ class Pong():
                     self.ball.reset_ball()
                     self.player2_score += 1  # Increasing the point for the first player
                     
-
                 if self.ball.rect.right >= self.settings.screen_width:
                     self.paddle_one.reset_paddle_one()
                     self.paddle_two.reset_paddle_two()
                     self.ball.reset_ball()
                     self.player1_score += 1   #Increasing the point for the second player
-                    
+                                    
             else:
                 self.display_text()
-
 
             # Make the most recently drawn screen visible.
             pygame.display.flip()
