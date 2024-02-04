@@ -3,7 +3,6 @@ import pygame
 from settings import Settings
 from paddle import PaddleOne, PaddleTwo
 from ball import Ball
-import random
 
 class Pong():
     """Overall class to manage game assets and behavior."""
@@ -18,7 +17,7 @@ class Pong():
         
         pygame.display.set_caption("Pong")
         
-        # Grupa sprite'ów dla paletki
+        # Group of sprites for paddles and ball
         self.paddle_one = PaddleOne()
         self.paddle_two = PaddleTwo()
         self.ball = Ball()
@@ -26,12 +25,12 @@ class Pong():
         self.all_sprites = pygame.sprite.Group()
         self.all_sprites.add(self.paddle_one,self.paddle_two, self.ball)
 
-        self.game_active = False  # Dodane, aby kontrolować, czy gra jest aktywna
+        self.game_active = False  # controlling if the game is active
 
         self.player1_score = 0
         self.player2_score = 0
 
-    # Funkcja do wyświetlania tekstu startowego na ekranie
+    # Start message
     def display_text(self):
         self.font_display_text = pygame.font.Font(None, 36)
         self.start_text = self.font_display_text.render("PRESS SPACE TO START GAME", True, self.settings.score_color)
@@ -44,20 +43,20 @@ class Pong():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-
+                
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                     self.game_active = True
-                    self.ball.active = True  # Dodane, aby aktywować ruch piłki
-                    self.ball.speed = [random.choice([-5, 5]), random.choice([-5, 5])]
+                    self.ball.active = True  # controlling move of ball
+                    self.ball.speed = self.settings.ball_speed
             
             if self.game_active:  
                 self.all_sprites.update()                
                            
-                # Odbicie od ścian
+                # Bouncing the ball off the walls
                 if self.ball.rect.top <= 0 or self.ball.rect.bottom >= self.settings.screen_height:
                     self.ball.speed[1] = -self.ball.speed[1]    
             
-                # Sprawdzenie kolizji piłki z paletkami
+                # Checking the collision of the ball with the paddles
                 if pygame.sprite.spritecollide(self.paddle_one, [self.ball], False) or pygame.sprite.spritecollide(self.paddle_two, [self.ball], False):
                     self.ball.speed[0] = -self.ball.speed[0]
             
@@ -66,22 +65,25 @@ class Pong():
                 self.all_sprites.draw(self.screen)
             
 
-                # Wyświetlanie wyniku
+                # Display score
                 font = pygame.font.Font(None, 36)
                 player1_text = font.render(f"Player 1: {self.player1_score}", True, self.settings.score_color)
                 player2_text = font.render(f"Player 2: {self.player2_score}", True, self.settings.score_color)
                 self.screen.blit(player1_text, (50, 50))
                 self.screen.blit(player2_text, (self.settings.screen_width - 200, 50))
 
-                # Resetowanie piłki i zliczanie punktu, jeśli wyleci za boisko
+                # Resetting the ball and counting the point if behind the field
                 if self.ball.rect.left <= 0:
                     self.ball.reset_ball()
-                    self.player2_score += 1  # Zwiększanie punktu dla drugiego gracza
+                    #self.paddle.reset_paddle_one()
+                    self.player2_score += 1  # Increasing the point for the first player
                     
 
                 if self.ball.rect.right >= self.settings.screen_width:
+                    # self.paddle_two.reset_paddle_two()
                     self.ball.reset_ball()
-                    self.player1_score += 1  # Zwiększanie punktu dla pierwszego gracza
+                    self.player1_score += 1   #Increasing the point for the second player
+                    
             else:
                 self.display_text()
 
