@@ -1,7 +1,6 @@
 import pygame
 from settings import Settings
 
-
 class PaddleOne(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()

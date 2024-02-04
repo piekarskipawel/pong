@@ -17,7 +17,7 @@ class Settings:
 
         # ball settings
         self.ball_color = (255,255,255)
-        self.base_speed = 5
+        self.base_speed = 7
         self.ball_speed = [random.choice([-self.base_speed, self.base_speed]), random.choice([-self.base_speed, self.base_speed])]
         
 
