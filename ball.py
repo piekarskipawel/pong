@@ -19,15 +19,14 @@ class Ball(pygame.sprite.Sprite):
         self.rect.x += self.speed[0]
         self.rect.y += self.speed[1]
 
-        # Odbicie od ścian
-        if self.rect.top <= 0 or self.rect.bottom >= self.settings.screen_height:
-            self.speed[1] = -self.speed[1]
+    def reset_ball(self):
+        self.active = False
+        self.rect.center = (self.settings.screen_width // 2, self.settings.screen_height // 2)
+        self.speed = [0, 0]
         
-        # Resetowanie piłki, jeśli wyleci za boisko
-        if self.rect.left <= 0 or self.rect.right >= self.settings.screen_width:
-            self.rect.center = (self.settings.screen_width // 2, self.settings.screen_height // 2)
-            self.speed = [random.choice([-5, 5]), random.choice([-5, 5])]
-            self.active = False
-            
+
+    
+
+           
         
   

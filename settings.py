@@ -9,4 +9,6 @@ class Settings:
         self.ball_color = (255,255,255)
         self.speed_paddle_one = 5
         self.speed_paddle_two = 5
+        self.score_color = (255,255,255)
+        self.start_game_color = (255,255,255)
         
