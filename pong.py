@@ -74,13 +74,15 @@ class Pong():
 
                 # Resetting the ball and counting the point if behind the field
                 if self.ball.rect.left <= 0:
+                    self.paddle_one.reset_paddle_one()
+                    self.paddle_two.reset_paddle_two()
                     self.ball.reset_ball()
-                    #self.paddle.reset_paddle_one()
                     self.player2_score += 1  # Increasing the point for the first player
                     
 
                 if self.ball.rect.right >= self.settings.screen_width:
-                    # self.paddle_two.reset_paddle_two()
+                    self.paddle_one.reset_paddle_one()
+                    self.paddle_two.reset_paddle_two()
                     self.ball.reset_ball()
                     self.player1_score += 1   #Increasing the point for the second player
                     
