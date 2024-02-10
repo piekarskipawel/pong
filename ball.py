@@ -21,12 +21,3 @@ class Ball(pygame.sprite.Sprite):
         self.active = False
         self.rect.center = (self.settings.screen_width // 2, self.settings.screen_height // 2)
         self.speed = [0, 0]
-        
-      
-        
-
-    
-
-           
-        
-  
