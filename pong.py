@@ -1,3 +1,7 @@
+'''
+Pong Game, author: Pawel Piekarski, e-mail: pawpiek@gmail.com
+'''
+
 import sys
 import pygame
 from settings import Settings
